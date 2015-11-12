@@ -3,13 +3,13 @@
 package Template::Plugin::JSON;
 use Moose;
 
-use JSON ();
+use JSON -support_by_pp, -no_export;
 
 use Carp qw/croak/;
 
 extends qw(Moose::Object Template::Plugin);
 
-our $VERSION = "0.06";
+our $VERSION = "0.07";
 
 
 has context => (
@@ -112,6 +112,11 @@ It will load the L<JSON> module (you probably want L<JSON::XS> installed for
 automatic speed ups).
 
 Any options on the USE line are passed through to the JSON object, much like L<JSON/to_json>.
+The C<-support_by_pp> flag is enabled, so it's possible to use options only
+supported by L<JSON::PP>, such as C<escape_slash> (something that's fairly
+important if embedding JSON into HTML without creating XSS problems). However
+if you do use JSON::PP-only features, L<JSON> will create a L<JSON::PP> object
+instead of a L<JSON::XS> object, which will impact speed a little.
 
 =head1 SEE ALSO
 

@@ -1,3 +1,7 @@
+0.07
+	- add -support_by_pp flag, so JSON will use JSON::PP if PP-only features
+	  (like escape_slash) are requested.
+
 0.06
 	- add json_decode method patch by Leo Lapworth
 
